@@ -1,0 +1,11 @@
+what,kind,bundleId,bundleVersion,description,time
+stopped,bundle,org.eclipse.mylyn.help.ui,3.0.5.v20090218-1800-e3x,org.eclipse.mylyn.help.ui,1254370344674
+stopped,bundle,org.eclipse.mylyn.bugzilla.ui,3.0.5.v20090218-1800-e3x,org.eclipse.mylyn.bugzilla.ui,1254370344674
+stopped,bundle,org.eclipse.mylyn.team.ui,3.0.5.v20090218-1800-e3x,org.eclipse.mylyn.team.ui,1254370344674
+stopped,bundle,org.eclipse.mylyn.resources.ui,3.0.5.v20090218-1800-e3x,org.eclipse.mylyn.resources.ui,1254370344674
+stopped,bundle,org.eclipse.mylyn.context.ui,3.0.5.v20090218-1800-e3x,org.eclipse.mylyn.context.ui,1254370344674
+stopped,bundle,org.eclipse.mylyn.tasks.bugs,3.0.5.v20090218-1800-e3x,org.eclipse.mylyn.tasks.bugs,1254370344674
+stopped,bundle,org.eclipse.mylyn.tasks.ui,3.0.5.v20090218-1800-e3x,org.eclipse.mylyn.tasks.ui,1254370344674
+stopped,bundle,org.eclipse.dd.ipxact.checker.ui,0.9.0.v20080609,org.eclipse.dd.ipxact.checker.ui,1254370344689
+stopped,bundle,org.eclipse.dd.ipxact.editor.ui,0.9.0.v20080609,org.eclipse.dd.ipxact.editor.ui,1254370344689
+stopped,bundle,org.eclipse.wst.xsd.ui,1.2.105.v200811282340,org.eclipse.wst.xsd.ui,1254370344689

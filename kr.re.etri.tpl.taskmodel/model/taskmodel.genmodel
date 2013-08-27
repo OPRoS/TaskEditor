@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/kr.re.etri.tpl.taskmodel/src"
+    editDirectory="/kr.re.etri.tpl.taskmodel.edit/src" editorDirectory="/kr.re.etri.tpl.taskmodel.editor/src"
+    modelPluginID="kr.re.etri.tpl.taskmodel" modelName="TaskModel" editPluginClass="kr.re.etri.tpl.taskmodel.provider.TaskModelEditPlugin"
+    editorPluginClass="kr.re.etri.tpl.taskmodel.presentation.TaskModelEditorPlugin"
+    testSuiteClass="kr.re.etri.tpl.taskmodel.tests.TaskModelAllTests" importerID="org.eclipse.emf.importer.ecore"
+    complianceLevel="6.0" copyrightFields="false" providerRootExtendsClass="" editPluginID="kr.re.etri.tpl.taskmodel.edit"
+    editorPluginID="kr.re.etri.tpl.taskmodel.editor">
+  <foreignModel>taskmodel.ecore</foreignModel>
+  <genPackages prefix="TaskModel" basePackage="kr.re.etri.tpl" disposableProviderFactory="true"
+      multipleEditorPages="false" extensibleProviderFactory="true" contentTypeIdentifier=""
+      fileExtensions="tpl" ecorePackage="taskmodel.ecore#/">
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="taskmodel.ecore#//LineStyle">
+      <genEnumLiterals ecoreEnumLiteral="taskmodel.ecore#//LineStyle/LINE_SOLID"/>
+      <genEnumLiterals ecoreEnumLiteral="taskmodel.ecore#//LineStyle/LINE_DASH"/>
+      <genEnumLiterals ecoreEnumLiteral="taskmodel.ecore#//LineStyle/LINE_DOT"/>
+      <genEnumLiterals ecoreEnumLiteral="taskmodel.ecore#//LineStyle/LINE_DASHDOT"/>
+      <genEnumLiterals ecoreEnumLiteral="taskmodel.ecore#//LineStyle/LINE_DASHDOTDOT"/>
+      <genEnumLiterals ecoreEnumLiteral="taskmodel.ecore#//LineStyle/LINE_CUSTOM"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="taskmodel.ecore#//LineEndPoint">
+      <genEnumLiterals ecoreEnumLiteral="taskmodel.ecore#//LineEndPoint/NONE"/>
+      <genEnumLiterals ecoreEnumLiteral="taskmodel.ecore#//LineEndPoint/OPENED_ARROW"/>
+      <genEnumLiterals ecoreEnumLiteral="taskmodel.ecore#//LineEndPoint/OPENED_TRIANGLE"/>
+      <genEnumLiterals ecoreEnumLiteral="taskmodel.ecore#//LineEndPoint/OPENED_SQUARE"/>
+      <genEnumLiterals ecoreEnumLiteral="taskmodel.ecore#//LineEndPoint/OPENED_CIRCLE"/>
+      <genEnumLiterals ecoreEnumLiteral="taskmodel.ecore#//LineEndPoint/CLOSED_TRIANGLE"/>
+      <genEnumLiterals ecoreEnumLiteral="taskmodel.ecore#//LineEndPoint/CLOSED_SQUARE"/>
+      <genEnumLiterals ecoreEnumLiteral="taskmodel.ecore#//LineEndPoint/CLOSED_CIRCLE"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="taskmodel.ecore#//RelationShip">
+      <genEnumLiterals ecoreEnumLiteral="taskmodel.ecore#//RelationShip/Transition"/>
+      <genEnumLiterals ecoreEnumLiteral="taskmodel.ecore#//RelationShip/TaskCall"/>
+      <genEnumLiterals ecoreEnumLiteral="taskmodel.ecore#//RelationShip/ActionCall"/>
+      <genEnumLiterals ecoreEnumLiteral="taskmodel.ecore#//RelationShip/Include"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="taskmodel.ecore#//StateAttribute">
+      <genEnumLiterals ecoreEnumLiteral="taskmodel.ecore#//StateAttribute/normal"/>
+      <genEnumLiterals ecoreEnumLiteral="taskmodel.ecore#//StateAttribute/initial"/>
+      <genEnumLiterals ecoreEnumLiteral="taskmodel.ecore#//StateAttribute/target"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="taskmodel.ecore#//StateActionType">
+      <genEnumLiterals ecoreEnumLiteral="taskmodel.ecore#//StateActionType/Entry"/>
+      <genEnumLiterals ecoreEnumLiteral="taskmodel.ecore#//StateActionType/Stay"/>
+      <genEnumLiterals ecoreEnumLiteral="taskmodel.ecore#//StateActionType/Exit"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="taskmodel.ecore#//Direction">
+      <genEnumLiterals ecoreEnumLiteral="taskmodel.ecore#//Direction/in"/>
+      <genEnumLiterals ecoreEnumLiteral="taskmodel.ecore#//Direction/out"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="taskmodel.ecore#//FloatingLiteral">
+      <genEnumLiterals ecoreEnumLiteral="taskmodel.ecore#//FloatingLiteral/stateTime"/>
+      <genEnumLiterals ecoreEnumLiteral="taskmodel.ecore#//FloatingLiteral/taskTime"/>
+      <genEnumLiterals ecoreEnumLiteral="taskmodel.ecore#//FloatingLiteral/RealFloatLiteral"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="taskmodel.ecore#//BooleanLiteral">
+      <genEnumLiterals ecoreEnumLiteral="taskmodel.ecore#//BooleanLiteral/false"/>
+      <genEnumLiterals ecoreEnumLiteral="taskmodel.ecore#//BooleanLiteral/true"/>
+      <genEnumLiterals ecoreEnumLiteral="taskmodel.ecore#//BooleanLiteral/isSubTaskFinal"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="taskmodel.ecore#//ReferAttribute">
+      <genEnumLiterals ecoreEnumLiteral="taskmodel.ecore#//ReferAttribute/normal"/>
+      <genEnumLiterals ecoreEnumLiteral="taskmodel.ecore#//ReferAttribute/external"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="taskmodel.ecore#//StructBlockType">
+      <genEnumLiterals ecoreEnumLiteral="taskmodel.ecore#//StructBlockType/construct"/>
+      <genEnumLiterals ecoreEnumLiteral="taskmodel.ecore#//StructBlockType/destruct"/>
+      <genEnumLiterals ecoreEnumLiteral="taskmodel.ecore#//StructBlockType/conexer"/>
+    </genEnums>
+    <genDataTypes ecoreDataType="taskmodel.ecore#//Point"/>
+    <genClasses ecoreClass="taskmodel.ecore#//ItemElement">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference taskmodel.ecore#//ItemElement/parent"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute taskmodel.ecore#//ItemElement/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute taskmodel.ecore#//ItemElement/description"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute taskmodel.ecore#//ItemElement/visible"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference taskmodel.ecore#//ItemElement/subDiagram"/>
+      <genFeatures createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference taskmodel.ecore#//ItemElement/references"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute taskmodel.ecore#//ItemElement/itemState"/>
+      <genOperations ecoreOperation="taskmodel.ecore#//ItemElement/isIncluded"/>
+    </genClasses>
+    <genClasses ecoreClass="taskmodel.ecore#//ShapeElement">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute taskmodel.ecore#//ShapeElement/x"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute taskmodel.ecore#//ShapeElement/y"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute taskmodel.ecore#//ShapeElement/width"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute taskmodel.ecore#//ShapeElement/height"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute taskmodel.ecore#//ShapeElement/collapsed"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute taskmodel.ecore#//ShapeElement/x2"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute taskmodel.ecore#//ShapeElement/y2"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute taskmodel.ecore#//ShapeElement/width2"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute taskmodel.ecore#//ShapeElement/height2"/>
+    </genClasses>
+    <genClasses ecoreClass="taskmodel.ecore#//LinkedElement">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference taskmodel.ecore#//LinkedElement/sourceConnections"/>
+      <genFeatures createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference taskmodel.ecore#//LinkedElement/targetConnections"/>
+    </genClasses>
+    <genClasses ecoreClass="taskmodel.ecore#//LineElement">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute taskmodel.ecore#//LineElement/lineStyle"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute taskmodel.ecore#//LineElement/sourceEndPoint"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute taskmodel.ecore#//LineElement/targetEndPoint"/>
+      <genFeatures children="true" createChild="true" ecoreFeature="ecore:EAttribute taskmodel.ecore#//LineElement/bendPoints"/>
+    </genClasses>
+    <genClasses ecoreClass="taskmodel.ecore#//ConnectionElement">
+      <genFeatures createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference taskmodel.ecore#//ConnectionElement/source"/>
+      <genFeatures createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference taskmodel.ecore#//ConnectionElement/target"/>
+      <genFeatures createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference taskmodel.ecore#//ConnectionElement/source2"/>
+      <genFeatures createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference taskmodel.ecore#//ConnectionElement/target2"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute taskmodel.ecore#//ConnectionElement/relationship"/>
+      <genFeatures children="true" createChild="false" ecoreFeature="ecore:EAttribute taskmodel.ecore#//ConnectionElement/condition"/>
+    </genClasses>
+    <genClasses ecoreClass="taskmodel.ecore#//WorkerElement">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute taskmodel.ecore#//WorkerElement/initialTask"/>
+      <genFeatures createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference taskmodel.ecore#//WorkerElement/items"/>
+    </genClasses>
+    <genClasses ecoreClass="taskmodel.ecore#//BlockElement">
+      <genFeatures children="true" createChild="false" ecoreFeature="ecore:EAttribute taskmodel.ecore#//BlockElement/statements"/>
+    </genClasses>
+    <genClasses ecoreClass="taskmodel.ecore#//TaskElement">
+      <genFeatures children="true" createChild="true" ecoreFeature="ecore:EReference taskmodel.ecore#//TaskElement/params"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference taskmodel.ecore#//TaskElement/states"/>
+      <genFeatures createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference taskmodel.ecore#//TaskElement/initialState"/>
+    </genClasses>
+    <genClasses ecoreClass="taskmodel.ecore#//StateElement">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute taskmodel.ecore#//StateElement/attribute"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference taskmodel.ecore#//StateElement/entry"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference taskmodel.ecore#//StateElement/stay"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference taskmodel.ecore#//StateElement/exit"/>
+    </genClasses>
+    <genClasses ecoreClass="taskmodel.ecore#//ActionElement">
+      <genFeatures children="true" createChild="true" ecoreFeature="ecore:EReference taskmodel.ecore#//ActionElement/params"/>
+    </genClasses>
+    <genClasses ecoreClass="taskmodel.ecore#//StateAction">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute taskmodel.ecore#//StateAction/stateActionType"/>
+    </genClasses>
+    <genClasses ecoreClass="taskmodel.ecore#//Symbol">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute taskmodel.ecore#//Symbol/direction"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute taskmodel.ecore#//Symbol/type"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute taskmodel.ecore#//Symbol/value"/>
+    </genClasses>
+    <genClasses ecoreClass="taskmodel.ecore#//Constant">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute taskmodel.ecore#//Constant/type"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute taskmodel.ecore#//Constant/initValue"/>
+    </genClasses>
+    <genClasses ecoreClass="taskmodel.ecore#//Function">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute taskmodel.ecore#//Function/type"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference taskmodel.ecore#//Function/params"/>
+    </genClasses>
+    <genClasses ecoreClass="taskmodel.ecore#//ModelElement">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference taskmodel.ecore#//ModelElement/symbols"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference taskmodel.ecore#//ModelElement/constants"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference taskmodel.ecore#//ModelElement/functions"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference taskmodel.ecore#//ModelElement/models"/>
+    </genClasses>
+    <genClasses ecoreClass="taskmodel.ecore#//ModelDiagram">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference taskmodel.ecore#//ModelDiagram/items"/>
+      <genFeatures property="None" children="true" createChild="true" propertyCategory=""
+          ecoreFeature="ecore:EReference taskmodel.ecore#//ModelDiagram/includeItems"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute taskmodel.ecore#//ModelDiagram/script"/>
+    </genClasses>
+    <genClasses ecoreClass="taskmodel.ecore#//IncludedElement">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute taskmodel.ecore#//IncludedElement/includePath"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference taskmodel.ecore#//IncludedElement/items"/>
+    </genClasses>
+    <genClasses ecoreClass="taskmodel.ecore#//Parameter">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute taskmodel.ecore#//Parameter/type"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute taskmodel.ecore#//Parameter/value"/>
+    </genClasses>
+    <genClasses ecoreClass="taskmodel.ecore#//EnumElement">
+      <genFeatures children="true" createChild="true" ecoreFeature="ecore:EReference taskmodel.ecore#//EnumElement/enumItem"/>
+    </genClasses>
+    <genClasses ecoreClass="taskmodel.ecore#//EnumItemElement">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute taskmodel.ecore#//EnumItemElement/value"/>
+    </genClasses>
+    <genClasses ecoreClass="taskmodel.ecore#//ReferElement">
+      <genFeatures createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference taskmodel.ecore#//ReferElement/realModel"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference taskmodel.ecore#//ReferElement/items"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute taskmodel.ecore#//ReferElement/attribute"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute taskmodel.ecore#//ReferElement/path"/>
+    </genClasses>
+    <genClasses ecoreClass="taskmodel.ecore#//SubDiagram">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference taskmodel.ecore#//SubDiagram/items"/>
+    </genClasses>
+    <genClasses ecoreClass="taskmodel.ecore#//ConnectorElement">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EAttribute taskmodel.ecore#//ConnectorElement/construct"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EAttribute taskmodel.ecore#//ConnectorElement/destruct"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EAttribute taskmodel.ecore#//ConnectorElement/conexer"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>

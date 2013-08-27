@@ -1,0 +1,575 @@
+grammar RFSM;
+
+options {
+	//language = C;	
+	//ASTLabelType=pANTLR3_BASE_TREE;
+	
+   	output=AST; 
+   	//k=2;  
+   	backtrack = true;
+   	memoize = true;
+}
+
+tokens 
+{
+   SBODY;VARS;BODY;
+   EXPR_ROOT; //this token used in program as int constant. do not delete this
+   INCL;
+   FNAME;
+   EXPRPAR;
+   ASMT;
+   COND;OR;AND;NOT;BOOL;
+   OP;ADD;MUL;SIGN;
+   IF;
+   TASK; BEHA; TASK2;
+   PARMS;
+   PARM;
+   GOTO;
+   STATES;STATE;SMOD; TMOD;
+   TRANS;
+   THIS;
+   ACTION;
+   STMTS;
+   TNAME;
+   SNAME;
+   TYPE;
+   NAME;
+   AMOD;
+   CALL;
+   CNAME;
+   CPARAMS;
+   CPARAM;
+   WHENT;
+   WHENF;  
+   SYMB;
+   LITE;
+   ID; 
+   PTYP;STYP;
+   WORKER;DESC;
+   ENUM;ELEM;MODEL;VAR;VMOD;
+   FUNC;RTN;
+   LITE_DEC;LITE_BOO;LITE_FLO;LITE_STR;
+   LVAR;RVAL;
+   STAY;
+   CONTEXT;CTXRULE;
+   RTDL;RTDLELE;
+   SEQ;PAR;WITH;
+}
+
+@lexer::header{
+package kr.re.etri.tpl.grammar;
+import kr.re.etri.tpl.diagram.listener.IErrorListener;
+}
+@parser::header{
+package kr.re.etri.tpl.grammar;
+import kr.re.etri.tpl.taskmodel.TaskModelPackage;
+import kr.re.etri.tpl.taskmodel.RelationShip;
+import kr.re.etri.tpl.diagram.listener.IErrorListener;
+}
+	
+@lexer::members{
+	private IErrorListener listener = null;
+	
+	public void setErrorListener(IErrorListener listener) {
+		this.listener = listener;
+	}
+	
+	public IErrorListener getErrorListener() {
+		return this.listener;
+	}
+
+	protected void enterRule(int rule, Parser parser, ParserRuleReturnScope returnScope){};
+	protected void exitRule(int rule, Parser parser, ParserRuleReturnScope returnScope){};
+	protected void enterSubRule(int subRule, Parser parser, ParserRuleReturnScope returnScope){};
+	protected void exitSubRule(int subRule, Parser parser, ParserRuleReturnScope returnScope){};
+
+
+
+	public Object recoverFromMismatchedToken(IntStream input, int ttype, BitSet follow)
+		throws RecognitionException
+	{
+		throw new MismatchedTokenException(ttype,input);
+	}
+}
+
+@parser::members{
+
+	private IErrorListener listener = null;
+	
+	public void setErrorListener(IErrorListener listener) {
+		this.listener = listener;
+	}
+	
+	public IErrorListener getErrorListener() {
+		return this.listener;
+	}
+
+	protected void enterRule(int rule, Parser parser, ParserRuleReturnScope returnScope){};
+	protected void exitRule(int rule, Parser parser, ParserRuleReturnScope returnScope){};
+	protected void enterSubRule(int subRule, Parser parser, ParserRuleReturnScope returnScope){};
+	protected void exitSubRule(int subRule, Parser parser, ParserRuleReturnScope returnScope){};
+
+
+	public Object recoverFromMismatchedToken(IntStream input, int ttype, BitSet follow)
+		throws RecognitionException
+	{
+		throw new MismatchedTokenException(ttype,input);
+	}
+}
+
+
+rfsm
+@init {
+	enterRule(TaskModelPackage.MODEL_DIAGRAM, this, retval);
+}
+	:  s1=rfsmDef EOF
+	-> ^(RTDL $s1)
+	;
+finally{
+	exitRule(TaskModelPackage.MODEL_DIAGRAM, this, retval);
+}
+rfsmDef
+	:  (includeDef|bhvDeclaration|taskDef|enumDef|modelDef|contextDef)*
+	;
+includeDef 
+@init {
+	enterRule(TaskModelPackage.INCLUDED_ELEMENT, this, retval);
+}
+	:  '#''include' s1=fileNames
+	-> ^(INCL $s1)
+	;
+finally{
+	exitRule(TaskModelPackage.INCLUDED_ELEMENT, this, retval);
+}	
+fileNames
+	:  s1=STRING_LITERAL
+	-> ^(FNAME $s1) 
+	;
+taskDef
+@init {
+	enterRule(TaskModelPackage.WORKER_ELEMENT, this, retval);
+}
+	:
+	 'task' s1=symbol '('s2=STRING_LITERAL ',' s3=symbol ')'';'
+	-> ^(WORKER ^(NAME $s1) ^(DESC $s2) ^(TASK $s3))
+	;
+finally{
+	exitRule(TaskModelPackage.WORKER_ELEMENT, this, retval);
+}	
+//workkDef
+//	: 'worker' s1=symbol s2=statementBlock ';'
+//	->^(TASK ^(NAME $s1) ^(STMTS $s2))
+//	;		
+enumDef
+@init {
+	enterRule(TaskModelPackage.ENUM_ELEMENT, this, retval);
+}
+	: 'enum' s1=symbol '{'s2=enumElements '}'';'
+	-> ^(ENUM ^(NAME $s1) $s2)
+	;
+finally{
+	exitRule(TaskModelPackage.ENUM_ELEMENT, this, retval);
+}
+enumElements
+	: enumElement (',' enumElement)* ';'
+	-> ^(ELEM enumElement)+
+	;
+enumElement
+@init {
+	enterRule(TaskModelPackage.ENUM_ITEM_ELEMENT, this, retval);
+}
+  	: Identifier
+  	;
+finally{
+	exitRule(TaskModelPackage.ENUM_ITEM_ELEMENT, this, retval);
+}	
+modelDef
+@init {
+	enterRule(TaskModelPackage.MODEL_ELEMENT, this, retval);
+}
+	:  'model' s1=Identifier '{'s2=modelElem '}'';'
+		//{ printf($a.text);if($a.text){}}
+	-> ^(MODEL ^(NAME $s1) $s2)
+	;
+finally{
+	exitRule(TaskModelPackage.MODEL_ELEMENT, this, retval);
+}
+modelElem
+	: (varDef|modelDef|funcDef)*
+	;
+contextDef
+        : 'context' s1=symbol '{'s2=contextElem '}'';'
+        -> ^(CONTEXT ^(NAME $s1) $s2*)
+	;
+contextElem
+	: (ctxRule|contextDef)*
+	;	
+ctxRule
+        : s1=symbol '=' s2=expr_par ';'	
+        -> ^(CTXRULE ^(NAME $s1) ^(COND $s2))
+        ;
+varDef
+@init {
+	enterRule(TaskModelPackage.SYMBOL, this, retval);
+}
+	: s1=varModifier s2=type s3=symbol ';'
+	-> ^(VAR ^(VMOD $s1) ^(TYPE $s2) ^(NAME $s3))
+	;
+finally{
+	exitRule(TaskModelPackage.SYMBOL, this, retval);
+}
+
+varModifier	
+	: 'in'|'out'|'wvar'|'gvar'
+	;
+funcDef
+@init {
+	enterRule(TaskModelPackage.FUNCTION, this, retval);
+}
+	: (a='action')? s0=type s1=symbol  '(' (s2=parameterDecl)? ')' ';'
+	-> ^(FUNC ^(ACTION $a)? ^(RTN $s0) ^(NAME $s1) $s2?)
+	;
+finally{
+	exitRule(TaskModelPackage.FUNCTION, this, retval);
+}
+actionDef
+@init {
+	enterRule(TaskModelPackage.ACTION_ELEMENT, this, retval);
+}
+	:  'action' s1=symbol '(' (s2=parameterDecl)? ')'';'
+	-> ^(ACTION ^(NAME $s1) $s2?)
+	;
+finally{
+	exitRule(TaskModelPackage.ACTION_ELEMENT, this, retval);
+}	
+bhvDeclaration
+@init {
+	enterRule(TaskModelPackage.TASK_ELEMENT, this, retval);
+}
+    :   'behavior' s1=Identifier  '(' (s2=parameterDecl)? ')' bhvBody
+      -> ^(BEHA ^(TNAME $s1) ^(PARMS $s2)? bhvBody)
+    ;   
+finally{
+	exitRule(TaskModelPackage.TASK_ELEMENT, this, retval);
+}
+bhvBody
+    :   '{' stateDeclaration* '}'(';')?
+      -> ^(STATES stateDeclaration*)
+    ;
+parameterDecl
+ 	: ( parameter ( ',' parameter )* )
+ 	-> parameter*  
+ //	| '(' ')' -> ^(PARM_NON)
+ 	;
+parameter  
+@init {
+	enterRule(TaskModelPackage.PARAMETER, this, retval);
+}
+ 	:  s1=type s2=symbol 
+ 	-> ^(PARM ^(TYPE $s1) ^(NAME $s2))  
+ 	;
+ finally{
+	exitRule(TaskModelPackage.PARAMETER, this, retval);
+}
+localVarDef
+	:  s1=type s2=Identifier ('=' s3=expr_add)? ';'
+	-> ^(LVAR ^(TYPE $s1) ^(NAME $s2) ^(RVAL $s3)?) 
+	; 
+type
+	: primitiveType -> ^(PTYP primitiveType)
+	| modelType -> ^(STYP modelType)
+	;
+modelType //enum or model type
+	:  symbol
+	;
+
+//token is not assinged to variable s1, 'var=rulename' is right example    
+stateDeclaration
+@init {
+	enterRule(TaskModelPackage.STATE_ELEMENT, this, retval);
+}
+    :  s1=stateModifier? 'state' s2=Identifier '{' stateBodyDecl? '}'
+      -> ^(STATE ^(SMOD $s1)? ^(SNAME $s2)  stateBodyDecl? )	
+    ;
+finally{
+	exitRule(TaskModelPackage.STATE_ELEMENT, this, retval);
+}
+stateModifier
+	: ('initial'|'target') 
+	;     
+//stateBodyDecl have to only one transition, entry, do, exit action block
+//the rule (transitionBody | actionBody)+ is enable to ignore the sequence of occurrence
+stateBodyDecl
+    :   (localVarDef)? (transitionBody | actionBody)+	
+    ;
+    /*
+transitionBody
+    :  s1='concurrent'? 'transition' stmt
+    -> ^(TRANS ^(TMOD $s1)? ^(STMTS stmt))
+    ;
+transitionDecl
+	:  gotostatement
+	|  ifstatement*
+	;
+	*/
+transitionBody
+@init {
+	enterRule(TaskModelPackage.RELATION_SHIP, this, retval);
+	enterSubRule(RelationShip.TRANSITION.getValue(), this, retval);
+}
+   :  s1='concurrent'? 'transition' stmt
+    -> ^(TRANS ^(TMOD $s1)? ^(STMTS stmt))
+    ;
+finally{
+	exitSubRule(RelationShip.TRANSITION.getValue(), this, retval);
+	exitRule(TaskModelPackage.RELATION_SHIP, this, retval);
+}
+//only Do Action block has task call statement. Entry or exit action block do not have task call statement
+//there is no difference between task call and action call, we check this regulation at a sementic checking time
+actionBody
+@init {
+	enterRule(TaskModelPackage.STATE_ACTION, this, retval);
+}
+	:  s1=actionModifier stmt
+	-> ^(ACTION ^(AMOD $s1) ^(STMTS stmt))
+	;	
+finally{
+	exitRule(TaskModelPackage.STATE_ACTION, this, retval);
+}	 
+actionModifier
+	:  ('entry'|'stay'|'exit')
+	;
+stmtblock 
+    :  '{'stmt*'}'
+    -> ^(STMTS stmt*)
+    ;
+stmt
+	:  stmtblock
+	|  ifstatement
+	|  gotostatement
+	|  callstatement
+	|  exprstatement
+	|  localVarDef
+	|  emptystatement
+	|  seqstatement
+	|  parstatement
+	;
+seqstatement
+    :  'sequential' withStmt
+    -> ^(SEQ withStmt)
+    ;
+parstatement
+    :  'parallel' withStmt
+    -> ^(PAR withStmt)
+    ;
+withStmt
+    :  'with'':' stmt
+    -> ^(WITH stmt) 
+    |  '{' withStmt* '}'
+    ;
+emptystatement
+    : ';'
+    ;   
+exprstatement
+	:  expr ';' -> expr
+	;
+callstatement
+	:  expr_call ';' ->expr_call	
+	;
+ifstatement
+    : 'if' expr_par stmt ('else' stmt)?
+    -> ^(IF ^(COND expr_par) ^(WHENT stmt) ^(WHENF stmt)?)
+    ;    
+gotostatement
+    :   'goto'(
+	  (s1=symbol ';' ->  ^(GOTO ^(STATE $s1)))
+	| (s2=expr_call ';' ->  ^(GOTO  ^(BEHA $s2))) 
+    	| (s3='stay' ';' -> ^(GOTO ^(STAY $s3)))
+	)
+;
+expr_call //action,function,task
+	:  s1=symbol '(' (s2=parameterValue)? ')'
+	-> ^(CALL ^(CNAME $s1) ^(CPARAMS $s2)?)
+    ;
+parameterValue 
+ 	: (s1=expr  ( ','  s2=expr )*)
+ 	-> ^(CPARAM expr)*
+ //	| '(' ')' -> ^(PARM_NON)
+ 	;
+//parameterAssignmentStatement 
+//	:  symbol   '='  expr_cond ';'
+//	;    
+
+expr
+    :  s1=expr_cond (s2=asmtOp s3=expr_add)? 
+    //-> ^(ASMT expr_cond (asmtOp expr_add)?)    
+    -> ^(ASMT ^(OP $s2)? $s1 $s3?)
+    ;  
+expr_cond
+    :  expr_or ( '?' expr ':' expr )? 
+    -> ^(COND expr_or ( '?' expr ':' expr )?)
+    ;    
+expr_or
+    :  expr_and ( '||' expr_and )* 
+    -> ^(OR expr_and ( expr_and )*)
+    ;
+expr_and
+    :  expr_not ( '&&' expr_not )* 
+    -> ^(AND expr_not ( expr_not )*)
+    ;
+expr_not
+    :  ( '!' )? expr_rel 
+    -> ^(NOT ( '!' )? expr_rel)
+    ;	
+expr_rel
+    :  s1=expr_add ( s2=relOp s3=expr_add )? 
+   //    -> ^(BOOL expr_add ( ^(BOOLOP boolOp) expr_add )*)
+    -> ^(BOOL ^(OP $s2)? $s1 $s3?)
+    ;
+expr_add
+    :  s1=expr_mul ( s2=addOp s3=expr_mul )*
+    //-> ^(ADD ^(OP $s2)? $s1 $s3? )
+	//-> ^(ADD ^(OP addOp)* expr_mul expr_mul* )
+	-> ^(ADD expr_mul (^(OP addOp)  expr_mul)* )
+    ;	
+expr_mul
+    :  s1=expr_sign ( s2=mulOp s3=expr_sign )*
+    //-> ^(MUL ^(OP $s2)? $s1 $s3? )
+	//-> ^(MUL ^(OP mulOp)* expr_sign expr_sign* )	
+	-> ^(MUL  expr_sign (^(OP mulOp) expr_sign)* )	
+    ;	
+expr_sign
+    :  (s1=addOp? s2=expr_signed -> ^(SIGN $s1? $s2))
+    ;
+expr_signed
+	:  valueType
+	|  expr_call
+	|  expr_par 
+	;
+expr_par
+    :  '(' expr ')' 
+    -> ^(EXPRPAR expr)
+    ;
+//expr_exp
+ //   :	call_expr
+ //   |	valueType
+ //   ;  
+asmtOp
+    :   ('=' | '+=' | '-=' | '*=' | '/=')
+    ;   
+relOp
+    :	('<'|'<='|'=='|'>'|'>='|'!=')
+    ;       
+addOp
+    :	('+'|'-')
+    ;
+mulOp
+    :	('*'|'/'|'%')
+    ;    	       
+valueType
+    :   (symbol -> ^(SYMB symbol))
+    |   (literal -> ^(LITE literal))
+    ;
+literal
+    :	(s1=DECIMAL_LITERAL -> ^(LITE_DEC $s1))
+    |   (s2=booleanLiteral -> ^(LITE_BOO $s2))
+    |	(s3=FLOATING_POINT_LITERAL ->^(LITE_FLO $s3))
+    |	(s4=STRING_LITERAL -> ^(LITE_STR $s4))
+    ;
+symbol
+    :	Identifier ('.' Identifier)* 
+    -> ^(ID Identifier ('.' Identifier)*)
+    //to get a string by using toStringTree() at ID poisition(root)
+    ;
+booleanLiteral
+    :   'true'
+    |   'false'
+    ;
+primitiveType
+    :   'bool'
+    |   'char'
+    |   'byte'
+    |   'short'
+    |   'int'
+    |   'long'
+    |   'float'
+    |   'double'
+    |   'string'
+    ;
+
+Identifier 
+	:   Letter (Letter|Digit)* 
+	;
+	
+fragment
+Letter :  'a'..'z'|'A'..'Z'|'_'|'$';
+/*
+Letter
+    :  '\u0024' |             //'$'
+       '\u0041'..'\u005a' |   //'A'..'Z'
+       '\u005f' |             //'_'
+       '\u0061'..'\u007a' |   //'a'..'z'
+
+       '\u00c0'..'\u00d6' |
+       '\u00d8'..'\u00f6' |
+       '\u00f8'..'\u00ff' |
+       '\u0100'..'\u1fff' |
+       '\u3040'..'\u318f' |  //Korean(& hiragana)
+       '\u3300'..'\u337f' |
+       '\u3400'..'\u3d2d' |
+       '\u4e00'..'\u9fff' |
+       '\uf900'..'\ufaff'
+       
+    ;
+*/	
+DECIMAL_LITERAL
+	: Digit+ ('l'|'L')? 
+	;
+STRING_LITERAL 
+    :  '"' ( EscapeSequence | ~('\\'|'"') )* '"'
+    | '\'' ( EscapeSequence | ~('\\'|'\'') )* '\''
+    ;    
+FLOATING_POINT_LITERAL
+    :   Digit + '.' Digit* Exponent? FloatTypeSuffix?
+    |   '.' Digit+ Exponent? FloatTypeSuffix?
+    |   Digit + Exponent FloatTypeSuffix?
+    |   Digit + FloatTypeSuffix
+    ;
+	
+fragment
+EscapeSequence : '\\' ('b'|'t'|'n'|'f'|'r'|'\"'|'\''|'\\');
+  
+
+    
+fragment
+Exponent : ('e'|'E') ('+'|'-')? ('0'..'9')+ ;
+
+fragment
+FloatTypeSuffix : ('f'|'F'|'d'|'D') ;
+    
+fragment
+Digit : '0'..'9';   
+
+WS  :  (' '|'\r'|'\t'|'\f'|'\n')* {$channel=HIDDEN;}
+    ;
+
+COMMENT
+    :   '/*' ( options {greedy=false;} : . )* '*/' {$channel=HIDDEN;}
+    ;
+
+LINE_COMMENT
+    : '//' ~('\n'|'\r')* '\r'? '\n' {$channel=HIDDEN;}
+    ;
+   	    
+    
+    
+Symstr
+	:	//('~'|'`'|'!'|'@'|'#'|'%'|'^'|'&'|'*'|'|'|':'|','|'.'|'?'|'/'|'\''|'"')/
+	~(Letter|Digit|'\''|'"'|'/')
+	;
+	
+	
+RStringLiteral 
+    :  '"'  ~('"')* '\'' 
+    |  '\'' ~('\'')* '"'
+    ; 

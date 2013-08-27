@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="ASCII"?>
+<tpl:ModelDiagram xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tpl="http://kr.re.etri.tpl/taskmodel" name="demo">
+  <subDiagram parent="/">
+    <items parent="//@subDiagram" name="demo_root" x="299" y="32" width="136" height="122" width2="120" height2="25" realModel="//@items.2">
+      <items xsi:type="tpl:ReferElement" parent="//@subDiagram/@items.0" name="decision" x="16" y="38" height="55" x2="219" y2="87" height2="55" realModel="//@items.2/@states.0">
+        <sourceConnections name="2" description="" targetEndPoint="CLOSED_TRIANGLE" source="//@subDiagram/@items.0/@items.0" target="//@subDiagram/@items.1" source2="//@subDiagram/@items.0/@items.0" target2="//@subDiagram/@items.1" relationship="TaskCall">
+          <condition>true</condition>
+        </sourceConnections>
+        <sourceConnections name="2" description="" targetEndPoint="CLOSED_TRIANGLE" source="//@subDiagram/@items.0/@items.0" target="//@subDiagram/@items.2" source2="//@subDiagram/@items.0/@items.0" target2="//@subDiagram/@items.2" relationship="TaskCall">
+          <condition>true</condition>
+        </sourceConnections>
+        <sourceConnections name="1" description="" targetEndPoint="CLOSED_TRIANGLE" source="//@subDiagram/@items.0/@items.0" target="//@subDiagram/@items.4" source2="//@subDiagram/@items.0/@items.0" target2="//@subDiagram/@items.4" relationship="TaskCall">
+          <condition>Nao_DetectColor.red==1 || Nao_DetectColor.blue==1</condition>
+        </sourceConnections>
+      </items>
+    </items>
+    <items parent="//@subDiagram" name="pan_tilt" x="17" y="67" width="268" height="214" width2="120" height2="25" targetConnections="//@subDiagram/@items.0/@items.0/@sourceConnections.0" realModel="//@items.4">
+      <items xsi:type="tpl:ReferElement" parent="//@subDiagram/@items.1" name="stopping" x="13" y="35" height="55" x2="13" y2="35" height2="55" realModel="//@items.4/@states.0">
+        <sourceConnections targetEndPoint="OPENED_ARROW" source="//@subDiagram/@items.1/@items.0" target="//@subDiagram/@items.1/@items.1" source2="//@subDiagram/@items.1/@items.0" target2="//@subDiagram/@items.1/@items.1"/>
+      </items>
+      <items xsi:type="tpl:ReferElement" parent="//@subDiagram/@items.1" name="pan2left" x="137" y="37" height="55" x2="137" y2="37" height2="55" targetConnections="//@subDiagram/@items.1/@items.0/@sourceConnections.0 //@subDiagram/@items.1/@items.2/@sourceConnections.0" realModel="//@items.4/@states.1">
+        <sourceConnections targetEndPoint="OPENED_ARROW" source="//@subDiagram/@items.1/@items.1" target="//@subDiagram/@items.1/@items.2" source2="//@subDiagram/@items.1/@items.1" target2="//@subDiagram/@items.1/@items.2"/>
+      </items>
+      <items xsi:type="tpl:ReferElement" parent="//@subDiagram/@items.1" name="pan2right" x="132" y="136" height="55" x2="132" y2="136" height2="55" targetConnections="//@subDiagram/@items.1/@items.1/@sourceConnections.0" realModel="//@items.4/@states.2">
+        <sourceConnections name="1" description="" targetEndPoint="OPENED_ARROW" source="//@subDiagram/@items.1/@items.2" target="//@subDiagram/@items.1/@items.1" source2="//@subDiagram/@items.1/@items.2" target2="//@subDiagram/@items.1/@items.1"/>
+      </items>
+    </items>
+    <items parent="//@subDiagram" name="wandering" x="80" y="331" width="293" height="201" width2="120" height2="25" targetConnections="//@subDiagram/@items.0/@items.0/@sourceConnections.1" realModel="//@items.6">
+      <items xsi:type="tpl:ReferElement" parent="//@subDiagram/@items.2" name="going" x="164" y="35" height="55" x2="58" y2="61" height2="55" targetConnections="//@subDiagram/@items.2/@items.2/@sourceConnections.0 //@subDiagram/@items.2/@items.1/@sourceConnections.0" realModel="//@items.6/@states.0">
+        <sourceConnections name="2" description="" targetEndPoint="OPENED_ARROW" source="//@subDiagram/@items.2/@items.0" target="//@subDiagram/@items.2/@items.1" source2="//@subDiagram/@items.2/@items.0" target2="//@subDiagram/@items.2/@items.1"/>
+        <sourceConnections targetEndPoint="OPENED_ARROW" source="//@subDiagram/@items.2/@items.0" target="//@subDiagram/@items.2/@items.2" source2="//@subDiagram/@items.2/@items.0" target2="//@subDiagram/@items.2/@items.2"/>
+      </items>
+      <items xsi:type="tpl:ReferElement" parent="//@subDiagram/@items.2" name="turning" x="94" y="126" height="55" x2="235" y2="62" height2="55" targetConnections="//@subDiagram/@items.2/@items.0/@sourceConnections.0 //@subDiagram/@items.2/@items.2/@sourceConnections.1" realModel="//@items.6/@states.1">
+        <sourceConnections targetEndPoint="OPENED_ARROW" source="//@subDiagram/@items.2/@items.1" target="//@subDiagram/@items.2/@items.0" source2="//@subDiagram/@items.2/@items.1" target2="//@subDiagram/@items.2/@items.0"/>
+        <sourceConnections name="" description="" targetEndPoint="OPENED_ARROW" source="//@subDiagram/@items.2/@items.1" target="//@subDiagram/@items.2/@items.2" source2="//@subDiagram/@items.2/@items.1" target2="//@subDiagram/@items.2/@items.2"/>
+      </items>
+      <items xsi:type="tpl:ReferElement" parent="//@subDiagram/@items.2" name="standing" x="19" y="39" height="55" targetConnections="//@subDiagram/@items.2/@items.0/@sourceConnections.1 //@subDiagram/@items.2/@items.1/@sourceConnections.1" realModel="//@items.6/@states.2">
+        <sourceConnections targetEndPoint="OPENED_ARROW" source="//@subDiagram/@items.2/@items.2" target="//@subDiagram/@items.2/@items.0" source2="//@subDiagram/@items.2/@items.2" target2="//@subDiagram/@items.2/@items.0"/>
+        <sourceConnections name="2" description="" targetEndPoint="OPENED_ARROW" source="//@subDiagram/@items.2/@items.2" target="//@subDiagram/@items.2/@items.1" source2="//@subDiagram/@items.2/@items.2" target2="//@subDiagram/@items.2/@items.1"/>
+      </items>
+    </items>
+    <items parent="//@subDiagram" name="reaction2color" x="425" y="364" width="281" height="124" width2="195" height2="25" targetConnections="//@subDiagram/@items.4/@items.2/@sourceConnections.0 //@subDiagram/@items.4/@items.1/@sourceConnections.0" realModel="//@items.5">
+      <items xsi:type="tpl:ReferElement" parent="//@subDiagram/@items.3" name="decision" x="35" y="44" height="55" realModel="//@items.5/@states.0"/>
+      <items xsi:type="tpl:ReferElement" parent="//@subDiagram/@items.3" name="stop" x="153" y="46" height="55" realModel="//@items.5/@states.1"/>
+    </items>
+    <items parent="//@subDiagram" name="detectingColor" x="456" y="88" width="300" height="200" width2="120" height2="24" targetConnections="//@subDiagram/@items.0/@items.0/@sourceConnections.2" realModel="//@items.3">
+      <items xsi:type="tpl:ReferElement" parent="//@subDiagram/@items.4" name="decision" x="112" y="43" height="55" targetConnections="//@subDiagram/@items.4/@items.0/@sourceConnections.0" realModel="//@items.3/@states.0">
+        <sourceConnections targetEndPoint="OPENED_ARROW" source="//@subDiagram/@items.4/@items.0" target="//@subDiagram/@items.4/@items.0" source2="//@subDiagram/@items.4/@items.0" target2="//@subDiagram/@items.4/@items.0"/>
+      </items>
+      <items xsi:type="tpl:ReferElement" parent="//@subDiagram/@items.4" name="onRed" x="23" y="104" height="55" targetConnections="//@subDiagram/@items.4/@items.1/@sourceConnections.1" realModel="//@items.3/@states.1">
+        <sourceConnections targetEndPoint="CLOSED_TRIANGLE" source="//@subDiagram/@items.4/@items.1" target="//@subDiagram/@items.3" source2="//@subDiagram/@items.4/@items.1" target2="//@subDiagram/@items.3" relationship="TaskCall"/>
+        <sourceConnections targetEndPoint="OPENED_ARROW" source="//@subDiagram/@items.4/@items.1" target="//@subDiagram/@items.4/@items.1" source2="//@subDiagram/@items.4/@items.1" target2="//@subDiagram/@items.4/@items.1"/>
+      </items>
+      <items xsi:type="tpl:ReferElement" parent="//@subDiagram/@items.4" name="onBlue" x="188" y="126" height="55" targetConnections="//@subDiagram/@items.4/@items.2/@sourceConnections.1" realModel="//@items.3/@states.2">
+        <sourceConnections targetEndPoint="CLOSED_TRIANGLE" source="//@subDiagram/@items.4/@items.2" target="//@subDiagram/@items.3" source2="//@subDiagram/@items.4/@items.2" target2="//@subDiagram/@items.3" relationship="TaskCall"/>
+        <sourceConnections targetEndPoint="OPENED_ARROW" source="//@subDiagram/@items.4/@items.2" target="//@subDiagram/@items.4/@items.2" source2="//@subDiagram/@items.4/@items.2" target2="//@subDiagram/@items.4/@items.2"/>
+      </items>
+    </items>
+  </subDiagram>
+  <items xsi:type="tpl:WorkerElement" parent="/" name="Demo2" itemState="65536" initialTask="detectingColor"/>
+  <items xsi:type="tpl:WorkerElement" parent="/" name="demo" description="" itemState="65536" initialTask="demo_root"/>
+  <items xsi:type="tpl:TaskElement" parent="/" name="demo_root" references="//@subDiagram/@items.0" itemState="65536" initialState="//@items.2/@states.0">
+    <states parent="//@items.2" name="decision" references="//@subDiagram/@items.0/@items.0" itemState="65536" attribute="initial">
+      <entry parent="//@items.2/@states.0" name="entry" description=""/>
+      <stay parent="//@items.2/@states.0" name="stay" stateActionType="stay"/>
+      <exit parent="//@items.2/@states.0" name="exit" stateActionType="exit"/>
+    </states>
+  </items>
+  <items xsi:type="tpl:TaskElement" parent="/" name="detectingColor" references="//@subDiagram/@items.4" itemState="65536" initialState="//@items.3/@states.0">
+    <states parent="//@items.3" name="decision" references="//@subDiagram/@items.4/@items.0" itemState="65536" attribute="initial">
+      <entry parent="//@items.3/@states.0" name="entry"/>
+      <stay parent="//@items.3/@states.0" name="stay" stateActionType="stay"/>
+      <exit parent="//@items.3/@states.0" name="exit" stateActionType="exit"/>
+    </states>
+    <states parent="//@items.3" name="onRed" references="//@subDiagram/@items.4/@items.1" itemState="65536">
+      <entry parent="//@items.3/@states.1" name="entry"/>
+      <stay parent="//@items.3/@states.1" name="stay" stateActionType="stay"/>
+      <exit parent="//@items.3/@states.1" name="exit" stateActionType="exit"/>
+    </states>
+    <states parent="//@items.3" name="onBlue" references="//@subDiagram/@items.4/@items.2" itemState="65536">
+      <entry parent="//@items.3/@states.2" name="entry"/>
+      <stay parent="//@items.3/@states.2" name="stay" stateActionType="stay"/>
+      <exit parent="//@items.3/@states.2" name="exit" stateActionType="exit"/>
+    </states>
+  </items>
+  <items xsi:type="tpl:TaskElement" parent="/" name="pan_tilt" description="" references="//@subDiagram/@items.1" itemState="65536" initialState="//@items.4/@states.0">
+    <params parent="//@items.4" name="param" type="int"/>
+    <states parent="//@items.4" name="stopping" references="//@subDiagram/@items.1/@items.0" itemState="65536" attribute="initial">
+      <entry parent="//@items.4/@states.0" name="entry"/>
+      <stay parent="//@items.4/@states.0" name="stay" stateActionType="stay"/>
+      <exit parent="//@items.4/@states.0" name="exit" stateActionType="exit"/>
+    </states>
+    <states parent="//@items.4" name="pan2left" references="//@subDiagram/@items.1/@items.1" itemState="65536">
+      <entry parent="//@items.4/@states.1" name="entry"/>
+      <stay parent="//@items.4/@states.1" name="stay" stateActionType="stay"/>
+      <exit parent="//@items.4/@states.1" name="exit" stateActionType="exit"/>
+    </states>
+    <states parent="//@items.4" name="pan2right" references="//@subDiagram/@items.1/@items.2" itemState="65536">
+      <entry parent="//@items.4/@states.2" name="entry"/>
+      <stay parent="//@items.4/@states.2" name="stay" stateActionType="stay"/>
+      <exit parent="//@items.4/@states.2" name="exit" stateActionType="exit"/>
+    </states>
+  </items>
+  <items xsi:type="tpl:TaskElement" parent="/" name="reaction2color" references="//@subDiagram/@items.3" itemState="65536" initialState="//@items.5/@states.0">
+    <states parent="//@items.5" name="decision" references="//@subDiagram/@items.3/@items.0" itemState="65536" attribute="initial">
+      <entry parent="//@items.5/@states.0" name="entry"/>
+      <stay parent="//@items.5/@states.0" name="stay" stateActionType="stay"/>
+      <exit parent="//@items.5/@states.0" name="exit" stateActionType="exit"/>
+    </states>
+    <states parent="//@items.5" name="stop" references="//@subDiagram/@items.3/@items.1" itemState="65536">
+      <entry parent="//@items.5/@states.1" name="entry"/>
+      <stay parent="//@items.5/@states.1" name="stay" stateActionType="stay"/>
+      <exit parent="//@items.5/@states.1" name="exit" stateActionType="exit"/>
+    </states>
+  </items>
+  <items xsi:type="tpl:TaskElement" parent="/" name="wandering" references="//@subDiagram/@items.2" itemState="65536" initialState="//@items.6/@states.2">
+    <params parent="//@items.6" name="param" type="int"/>
+    <states parent="//@items.6" name="going" references="//@subDiagram/@items.2/@items.0" itemState="65536">
+      <entry parent="//@items.6/@states.0" name="entry"/>
+      <stay parent="//@items.6/@states.0" name="stay" stateActionType="stay"/>
+      <exit parent="//@items.6/@states.0" name="exit" stateActionType="exit"/>
+    </states>
+    <states parent="//@items.6" name="turning" references="//@subDiagram/@items.2/@items.1" itemState="65536">
+      <entry parent="//@items.6/@states.1" name="entry"/>
+      <stay parent="//@items.6/@states.1" name="stay" stateActionType="stay"/>
+      <exit parent="//@items.6/@states.1" name="exit" stateActionType="exit"/>
+    </states>
+    <states parent="//@items.6" name="standing" references="//@subDiagram/@items.2/@items.2" itemState="65536" attribute="initial">
+      <entry parent="//@items.6/@states.2" name="entry"/>
+      <stay parent="//@items.6/@states.2" name="stay" stateActionType="stay"/>
+      <exit parent="//@items.6/@states.2" name="exit" stateActionType="exit"/>
+    </states>
+  </items>
+  <includeItems parent="/" itemState="65536" includePath="demo/Nao_Model.tpl">
+    <items xsi:type="tpl:ModelElement" parent="//@includeItems.0" name="Arm">
+      <functions parent="//@includeItems.0/@items.0" name="leftup" type="action int"/>
+      <functions parent="//@includeItems.0/@items.0" name="rightup" type="action int"/>
+    </items>
+    <items xsi:type="tpl:ModelElement" parent="//@includeItems.0" name="Move">
+      <functions parent="//@includeItems.0/@items.1" name="go" type="action int"/>
+      <functions parent="//@includeItems.0/@items.1" name="goBlock" type="action int"/>
+      <functions parent="//@includeItems.0/@items.1" name="turn" type="action int"/>
+      <functions parent="//@includeItems.0/@items.1" name="turnBlock" type="action int"/>
+      <functions parent="//@includeItems.0/@items.1" name="stop" type="action int"/>
+      <functions parent="//@includeItems.0/@items.1" name="walkIsActive" type="action int"/>
+      <functions parent="//@includeItems.0/@items.1" name="getRemaningFootStepCount" type="int"/>
+    </items>
+    <items xsi:type="tpl:ModelElement" parent="//@includeItems.0" name="Head">
+      <functions parent="//@includeItems.0/@items.2" name="turnLeft" type="action int"/>
+      <functions parent="//@includeItems.0/@items.2" name="turnRight" type="action int"/>
+      <functions parent="//@includeItems.0/@items.2" name="stop" type="action int"/>
+    </items>
+    <items xsi:type="tpl:ModelElement" parent="//@includeItems.0" name="Nao_DetectColor">
+      <symbols parent="//@includeItems.0/@items.3" name="red" type="int"/>
+      <symbols parent="//@includeItems.0/@items.3" name="blue" type="int"/>
+      <symbols parent="//@includeItems.0/@items.3" name="gain" type="int"/>
+    </items>
+  </includeItems>
+</tpl:ModelDiagram>
