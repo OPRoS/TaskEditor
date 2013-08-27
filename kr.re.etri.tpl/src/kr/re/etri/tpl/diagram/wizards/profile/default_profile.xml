@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component_profile>
+	<execution_environment>
+		<os name="" version=""/>
+		<cpu/>
+		<library_type/>
+		<library_name/>
+		<impl_language/>
+		<compiler/>
+	</execution_environment>
+	<execution_semantics>
+		<type/>
+		<period/>
+		<priority/>
+		<creation_type/>
+		<lifecycle_type/>
+	</execution_semantics>
+</component_profile>
