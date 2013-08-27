@@ -1,0 +1,28 @@
+//model Arm{
+//	action int leftup();  //¿ÞÂÊ ¾î±ú ¿Ã¸®±â
+//	action int rightup(); //¿À¸¥ÂÊ ¾î±ú ¿Ã¸®±â
+//};
+
+model Move{
+	
+	action int go();
+	action int goBlock();
+	action int turn();
+	action int turnBlock();
+	action int stop();
+	action int walkIsActive();
+	
+	int getRemaningFootStepCount();
+};
+
+model Head{
+	action int turnLeft();
+	action int turnRight();
+	action int stop();
+};
+
+model Nao_DetectColor{
+	in int red;
+	in int blue;
+	in int gain;
+};

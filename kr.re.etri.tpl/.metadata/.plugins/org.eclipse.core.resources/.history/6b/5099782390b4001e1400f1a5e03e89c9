@@ -1,0 +1,28 @@
+model Arm{
+	action int leftup();  //왼쪽 어깨 올리기
+	action int rightup(); //오른쪽 어깨 올리기
+}
+
+model Move{
+	
+	action int go();
+	action int goBlock();
+	action int turn();
+	action int turnBlock();
+	action int stop();
+	action int walkIsActive();
+	
+	int getRemaningFootStepCount();
+};
+
+model Head{
+	action int turnLeft();
+	action int turnRight();
+	action int stop();
+};
+
+model Nao_DetectColor{
+	in int red;
+	in int blue;
+	in int gain;
+};
